@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canadian Trivia Quiz 🍁</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .category-section {
+            margin-bottom: 50px;
+        }
+
+        .category-title {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .question-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            min-height: 60px;
+        }
+
+        .reveal-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .reveal-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .reveal-btn:active {
+            transform: scale(0.98);
+        }
+
+        .answer-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .answer-container.show {
+            max-height: 200px;
+        }
+
+        .answer-text {
+            background: #f0f4ff;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            margin-top: 12px;
+            border-radius: 6px;
+            font-size: 1em;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            padding: 20px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .questions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-title {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍁 Canadian Trivia Quiz 🍁</h1>
+            <p>Test your knowledge of Canada's geography, history, culture, and sports!</p>
+        </div>
+
+        <!-- GEOGRAPHY SECTION -->
+        <div class="category-section">
+            <div class="category-title">🗺️ Geography (15 Questions)</div>
+            <div class="questions-grid">
+                <div class="question-card">
+                    <div class="question-text">1. What is the capital of Canada?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Ottawa</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">2. Which is Canada's largest province by area?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Quebec</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">3. What are the five Great Lakes?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Superior, Michigan, Huron, Erie, and Ontario</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">4. Which mountain range includes Mount Robson?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">The Rocky Mountains</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">5. What is Canada's easternmost province?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Newfoundland and Labrador</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">6. Which river is the longest in Canada?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">The Mackenzie River</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">7. How many provinces and territories does Canada have?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">13 (10 provinces and 3 territories)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">8. Which is Canada's smallest province by population?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Prince Edward Island</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">9. What is the capital of British Columbia?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Victoria</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">10. Which Canadian city is known as the "Gateway to the West"?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Winnipeg</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">11. What is the capital of Alberta?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Edmonton</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">12. Which Canadian waterfalls are among the most famous in the world?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Niagara Falls</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">13. What is the capital of Saskatchewan?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Regina</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">14. Which national park is Canada's oldest?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Banff National Park</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">15. What is Canada's third-largest city?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Vancouver</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HISTORY SECTION -->
+        <div class="category-section">
+            <div class="category-title">📚 History (15 Questions)</div>
+            <div class="questions-grid">
+                <div class="question-card">
+                    <div class="question-text">1. In what year did Canada achieve Confederation?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">1867</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">2. Who was Canada's first Prime Minister?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Sir John A. Macdonald</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">3. What document established Canadian Confederation in 1867?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">The British North America Act</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">4. In what year did Canada gain complete independence?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">1982 (with the patriation of the Constitution)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">5. Who was the first Indigenous Prime Minister of Canada?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">There has not been one yet</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">6. What year was the Canadian flag officially adopted?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">1965</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">7. Which explorer is credited with discovering Canada?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">John Cabot (1497)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">8. What was the name of the fur trading company that explored Canada?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">The Hudson's Bay Company</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">9. In what year did Canada declare independence from Britain?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Gradually from 1867 onward (1982 for full patriation)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">10. Who was the first European to reach the Pacific coast from Canada?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Alexander Mackenzie (1793)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">11. What was the War of 1812?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">A conflict between the United States and the British Empire (fought in Canada)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">12. Who led the Quiet Revolution in Quebec?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Jean Lesage and later Pierre Trudeau</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">13. What year did Canada become a full nation within the Commonwealth?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">1926 (Balfour Declaration)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">14. Which Canadian general is famous for defending Canada in the War of 1812?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">General Isaac Brock</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">15. What was the purpose of the transcontinental railway built in Canada?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">To connect eastern and western Canada and encourage settlement</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CULTURE SECTION -->
+        <div class="category-section">
+            <div class="category-title">🎨 Culture (15 Questions)</div>
+            <div class="questions-grid">
+                <div class="question-card">
+                    <div class="question-text">1. What is Canada's national food sport?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Hockey</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">2. What is poutine?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">French fries topped with gravy and cheese curds (Quebec specialty)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">3. How many official languages does Canada have?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Two: English and French</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">4. Who is the famous Canadian magician and illusionist?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">David Copperfield</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">5. What Indigenous peoples are native to Canada?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">First Nations, Métis, and Inuit peoples</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">6. What is a traditional Canadian winter sport played on ice?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Curling</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">7. Which Canadian singer is known for songs like "Closer"?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">The Weeknd</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">8. What is Canada's national symbol animal?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">The beaver</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">9. Who is the famous Canadian actor from Deadpool?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Ryan Reynolds</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">10. What is Maple syrup primarily made from?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Sugar maple tree sap</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">11. Who is the Canadian author famous for the Anne of Green Gables series?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Lucy Maud Montgomery</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">12. What Canadian film festival is held annually in Toronto?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Toronto International Film Festival (TIFF)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">13. What is Tourtière?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">A traditional Canadian meat pie, especially popular at Christmas</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">14. Which Canadian musician won a Grammy for "Bad Guy"?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Justin Bieber</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">15. What is the national holiday celebrated on July 1st?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Canada Day</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SPORTS SECTION -->
+        <div class="category-section">
+            <div class="category-title">⚽ Sports (15 Questions)</div>
+            <div class="questions-grid">
+                <div class="question-card">
+                    <div class="question-text">1. Which Canadian ice hockey team won the most Stanley Cups?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Montreal Canadiens (24 Stanley Cups)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">2. Who is the Canadian hockey legend known as "The Great One"?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Wayne Gretzky</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">3. In what year did Canada first win the Winter Olympics hockey gold?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">1952 (men's) and 2002 (women's)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">4. Which city hosted the Winter Olympics in 2010?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Vancouver</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">5. What is the name of Canada's national ice hockey league?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">National Hockey League (NHL)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">6. Who is the Canadian tennis player known for winning Wimbledon?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Milos Raonic or Eugenie Bouchard</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">7. Which Canadian football team won the most Grey Cups?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Toronto Argonauts and Winnipeg Blue Bombers (tied)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">8. Who is the famous Canadian figure skater known for landing the first triple axel?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Axel Paulsen (Norwegian, but the jump is named after him)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">9. In what year did the Toronto Blue Jays win the World Series?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">1992 and 1993</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">10. Which Canadian Olympic athlete is known for winning gold in speed skating?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Catriona Le May Doan or Clara Hughes</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">11. What sport did Terry Fox run to raise awareness for?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Marathon running (to raise cancer awareness)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">12. In which sport did Canada host the Summer Olympics?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Montreal (1976)</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">13. Which hockey player is known as "The Rocket"?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Maurice Richard</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">14. What is the Canadian Football League's championship called?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">The Grey Cup</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">15. Which Canadian golfer won the Masters Tournament?</div>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Tap to Reveal Answer</button>
+                    <div class="answer-container">
+                        <div class="answer-text">Mike Weir (2003)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🍁 Enjoy the Canadian Trivia Quiz! Test your knowledge and share with friends. 🍁</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleAnswer(button) {
+            const answerContainer = button.nextElementSibling;
+            answerContainer.classList.toggle('show');
+            
+            if (answerContainer.classList.contains('show')) {
+                button.textContent = 'Hide Answer';
+            } else {
+                button.textContent = 'Tap to Reveal Answer';
+            }
+        }
+    </script>
+</body>
+</html>
